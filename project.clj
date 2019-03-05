@@ -21,8 +21,7 @@
                                  :host    "0.0.0.0"
                                  :port    39998}
                   :plugins      [[cider/cider-nrepl "0.21.1"]
-                                 [refactor-nrepl "2.4.0"]
-                                 [lein-ancient "0.6.15"]]}
+                                 [refactor-nrepl "2.4.0"]]}
    :uberjar      {:aot :all}
    :profiles/dev {}
    :project/dev  {:source-paths   ["dev/src"]
@@ -30,4 +29,5 @@
                   :dependencies   [[integrant/repl "0.3.1"]
                                    [eftest "0.5.4"]
                                    [kerodon "0.9.0"]
-                                   [alembic "0.3.2"]]}})
+                                   [alembic "0.3.2"]]
+                  :plugins        [[lein-ancient "0.6.15"]]}})
