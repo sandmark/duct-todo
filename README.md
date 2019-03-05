@@ -3,6 +3,15 @@
 
 ## Developing
 
+### Dockerの準備
+```sh
+docker-compose build
+docker-compose run repl lein run duct todo +api +ataraxy +postgres
+sudo chown sandmark:docker todo/ -R
+mv todo/* todo/.* .
+rm -r todo/
+```
+
 ### Setup
 
 When you first clone this repository, run:
