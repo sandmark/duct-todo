@@ -29,4 +29,5 @@
                   :resource-paths ["dev/resources"]
                   :dependencies   [[integrant/repl "0.3.1"]
                                    [eftest "0.5.4"]
-                                   [kerodon "0.9.0"]]}})
+                                   [kerodon "0.9.0"]
+                                   [alembic "0.3.2"]]}})
