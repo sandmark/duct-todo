@@ -19,7 +19,10 @@
    :repl         {:prep-tasks   ^:replace ["javac" "compile"]
                   :repl-options {:init-ns user
                                  :host    "0.0.0.0"
-                                 :port    39998}}
+                                 :port    39998}
+                  :plugins      [[cider/cider-nrepl "0.21.1"]
+                                 [refactor-nrepl "2.4.0"]
+                                 [lein-ancient "0.6.15"]]}
    :uberjar      {:aot :all}
    :profiles/dev {}
    :project/dev  {:source-paths   ["dev/src"]
