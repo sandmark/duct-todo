@@ -6,7 +6,15 @@
    :handlers {:index #ig/ref :todo.handler/index}}
 
   [:duct.handler.static/ok :todo.handler/index]
-  {:body {:articles "/articles"}}}
+  {:body {:articles "/articles"}}
+
+  :duct.migrator/ragtime
+  {:migrations [#ig/ref :todo.migration/create-articles]}
+
+  [:duct.migrator.ragtime/sql :todo.migration/create-articles]
+  {:up   ["CREATE TABLE articles (id serial NOT NULL PRIMARY KEY,
+                                  content text NOT NULL)"]
+   :down ["DROP TABLE articles"]}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
