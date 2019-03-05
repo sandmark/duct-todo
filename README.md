@@ -12,6 +12,11 @@ mv todo/* todo/.* .
 rm -r todo/
 ```
 
+### REPLの起動
+```sh
+docker-compose run --service-ports repl
+```
+
 ### Setup
 
 When you first clone this repository, run:
