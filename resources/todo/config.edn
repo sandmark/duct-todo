@@ -2,11 +2,17 @@
  {:duct.core/project-ns todo
 
   :duct.router/ataraxy
-  {:routes   {[:get "/"] [:index]}
-   :handlers {:index #ig/ref :todo.handler/index}}
+  {:routes {[:get "/"]         [:index]
+            [:get "/articles"] [:articles/index]}
+
+   :handlers {:index          #ig/ref :todo.handler/index
+              :articles/index #ig/ref :todo.handler.articles/index}}
 
   [:duct.handler.static/ok :todo.handler/index]
   {:body {:articles "/articles"}}
+
+  [:duct.handler.sql/query :todo.handler.articles/index]
+  {:sql ["SELECT * FROM articles"]}
 
   :duct.migrator/ragtime
   {:migrations [#ig/ref :todo.migration/create-articles]}
