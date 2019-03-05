@@ -7,9 +7,12 @@
 ```sh
 docker-compose build
 docker-compose run repl lein run duct todo +api +ataraxy +postgres
+
 sudo chown sandmark:docker todo/ -R
 mv todo/* todo/.* .
 rm -r todo/
+
+docker-compose run --service-ports repl lein duct setup
 ```
 
 ### REPLの起動
