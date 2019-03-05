@@ -2,7 +2,11 @@
  {:duct.core/project-ns todo
 
   :duct.router/ataraxy
-  {:routes {}}}
+  {:routes   {[:get "/"] [:index]}
+   :handlers {:index #ig/ref :todo.handler/index}}
+
+  [:duct.handler.static/ok :todo.handler/index]
+  {:body {:articles "/articles"}}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
@@ -10,4 +14,4 @@
 
  :duct.module/logging {}
  :duct.module.web/api {}
- :duct.module/sql {}}
+ :duct.module/sql     {}}
