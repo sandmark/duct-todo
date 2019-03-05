@@ -8,6 +8,7 @@
                  [duct/module.web "0.7.0"]
                  [duct/module.ataraxy "0.3.0"]
                  [duct/module.sql "0.5.0"]
+                 [duct/handler.sql "0.4.0"]
                  [org.postgresql/postgresql "42.2.5"]]
   :plugins [[duct/lein-duct "0.11.2"]]
   :main ^:skip-aot todo.main
