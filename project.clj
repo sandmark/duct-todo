@@ -18,6 +18,7 @@
   {:dev          [:project/dev :profiles/dev]
    :repl         {:prep-tasks   ^:replace ["javac" "compile"]
                   :repl-options {:init-ns user
+                                 :host    "0.0.0.0"
                                  :port    39998}}
    :uberjar      {:aot :all}
    :profiles/dev {}
