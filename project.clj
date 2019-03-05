@@ -15,10 +15,11 @@
   :prep-tasks     ["javac" "compile" ["run" ":duct/compiler"]]
   :middleware     [lein-duct.plugin/middleware]
   :profiles
-  {:dev  [:project/dev :profiles/dev]
-   :repl {:prep-tasks   ^:replace ["javac" "compile"]
-          :repl-options {:init-ns user}}
-   :uberjar {:aot :all}
+  {:dev          [:project/dev :profiles/dev]
+   :repl         {:prep-tasks   ^:replace ["javac" "compile"]
+                  :repl-options {:init-ns user
+                                 :port    39998}}
+   :uberjar      {:aot :all}
    :profiles/dev {}
    :project/dev  {:source-paths   ["dev/src"]
                   :resource-paths ["dev/resources"]
