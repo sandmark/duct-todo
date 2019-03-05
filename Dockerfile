@@ -1,4 +1,4 @@
-FROM clojure:lein-2.8.1
+FROM clojure:lein-2.9.1
 ENV LANG C.UTF-8
 
 ENV APP_HOME /todo
