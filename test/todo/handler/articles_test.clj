@@ -17,4 +17,10 @@
           [status message] (handler {})]
       (t/is (= :ataraxy.response/ok status))
       (t/is (= [{:id 1 :content "foo"}]
-               message)))))
+               message))))
+
+  (t/testing "POST /articles"
+    (let [handler          (ig/init-key ::sut/create {:db database-stub})
+          [status message] (handler {})]
+      (t/is (= :ataraxy.response/created status))
+      (t/is (= "/articles/1" message)))))
