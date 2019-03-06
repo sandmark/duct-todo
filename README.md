@@ -3,10 +3,11 @@
 
 ## Developing
 
-### Dockerの準備
+### プロジェクト準備時にしたこと
 ```sh
 docker-compose build
 docker-compose run repl lein run duct todo +api +ataraxy +postgres
+
 sudo chown sandmark:docker todo/ -R
 mv todo/* todo/.* .
 rm -r todo/
@@ -14,31 +15,30 @@ rm -r todo/
 
 ### Setup
 
-When you first clone this repository, run:
+初めて `git clone` したときは以下のコマンドを実行。
 
 ```sh
-lein duct setup
+docker-compose run repl lein duct setup
 ```
 
-This will create files for local configuration, and prep your system
-for the project.
+コード管理に含まれない `local` 設定ファイルが作られるので、自分の環境に合わせて変えること。
 
 ### Environment
 
-To begin developing, start with a REPL.
+開発するときは以下のコマンドでREPLを起動する。
 
 ```sh
-lein repl
+docker-compose run --service-ports repl
 ```
 
-Then load the development environment.
+それから `dev` environmentをロード。
 
 ```clojure
 user=> (dev)
 :loaded
 ```
 
-Run `go` to prep and initiate the system.
+`go` でシステムを準備・起動できる。
 
 ```clojure
 dev=> (go)
@@ -46,10 +46,9 @@ dev=> (go)
 :initiated
 ```
 
-By default this creates a web server at <http://localhost:3000>.
+デフォルトでは <http://localhost:3000> でListenするようになってるけど、 `docker-compose.yml` で変更できるよ。
 
-When you make changes to your source files, use `reset` to reload any
-modified files and reset the server.
+ソースコードを変更したら `reset` でファイルをリロードして、サーバをリセットすること。
 
 ```clojure
 dev=> (reset)
@@ -59,15 +58,14 @@ dev=> (reset)
 
 ### Testing
 
-Testing is fastest through the REPL, as you avoid environment startup
-time.
+環境をロードする時間がないぶん、REPLからテストするのが一番速い。
 
 ```clojure
 dev=> (test)
 ...
 ```
 
-But you can also run tests through Leiningen.
+でもLeiningenから実行することもできる。
 
 ```sh
 lein test

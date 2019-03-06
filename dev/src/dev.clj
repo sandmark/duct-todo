@@ -17,10 +17,12 @@
   (duct/read-config (io/resource "todo/config.edn")))
 
 (defn test []
-  (eftest/run-tests (eftest/find-tests "test")))
+  (eftest/run-tests (eftest/find-tests "test")
+                    {:capture-output? false
+                     :multithread? false}))
 
 (def profiles
-  [:duct.profile/dev :duct.profile/local])
+  [:duct.profile/dev :duct.profile/env_test :duct.profile/local])
 
 (clojure.tools.namespace.repl/set-refresh-dirs "dev/src" "src" "test")
 

@@ -1,2 +1,2 @@
 {:duct.database/sql
- {:connection-uri "jdbc:postgresql://localhost/postgres"}}
+ {:connection-uri #duct/env "DEV_DB_URL"}}

@@ -1,13 +1,53 @@
 {:duct.profile/base
  {:duct.core/project-ns todo
 
-  :duct.router/ataraxy
-  {:routes {}}}
+  :duct.middleware.buddy/authentication
+  {:backend :jws
+   :secret  #duct/env "JWT_SECRET"}
 
- :duct.profile/dev   #duct/include "dev"
- :duct.profile/local #duct/include "local"
- :duct.profile/prod  {}
+  :duct.router/ataraxy
+  {:routes {["/users"]
+            {[:post]           [:users/create]
+             [:post "/signin"] [:users/signin]}
+
+            ["/articles"]
+            {[:get]  [:articles/index]
+             [:post] ^:jws-auth [:articles/create]}}
+
+   :handlers {:articles/index  #ig/ref :todo.handler.articles/index
+              :articles/create #ig/ref :todo.handler.articles/create
+              :users/create    #ig/ref :todo.handler.users/create
+              :users/signin    #ig/ref :todo.handler.users/signin}
+
+   :middleware {:jws-auth #ig/ref :duct.middleware.buddy/authentication}}
+
+  :todo.handler.articles/index  {:db #ig/ref :duct.database/sql}
+  :todo.handler.articles/create {:db #ig/ref :duct.database/sql}
+  :todo.handler.users/create    {:db #ig/ref :duct.database/sql}
+
+  :todo.handler.users/signin {:db         #ig/ref :duct.database/sql
+                              :jwt-secret #duct/env "JWT_SECRET"}
+
+  :duct.migrator/ragtime
+  {:migrations [#ig/ref :todo.migration/create-articles
+                #ig/ref :todo.migration/create-users]}
+
+  [:duct.migrator.ragtime/sql :todo.migration/create-articles]
+  {:up   ["CREATE TABLE articles (id serial NOT NULL PRIMARY KEY,
+                                  content text NOT NULL)"]
+   :down ["DROP TABLE articles"]}
+
+  [:duct.migrator.ragtime/sql :todo.migration/create-users]
+  {:up   ["CREATE TABLE users (id serial NOT NULL PRIMARY KEY,
+                        email varchar(80) NOT NULL UNIQUE,
+                        password_digest varchar(255) NOT NULL)"]
+   :down ["DROP TABLE users"]}}
+
+ :duct.profile/env_test #duct/include "env_test"
+ :duct.profile/dev      #duct/include "dev"
+ :duct.profile/local    #duct/include "local"
+ :duct.profile/prod     {}
 
  :duct.module/logging {}
  :duct.module.web/api {}
- :duct.module/sql {}}
+ :duct.module/sql     {}}
