@@ -9,7 +9,8 @@
                  [duct/module.ataraxy "0.3.0"]
                  [duct/module.sql "0.5.0"]
                  [duct/handler.sql "0.4.0"]
-                 [org.postgresql/postgresql "42.2.5"]]
+                 [org.postgresql/postgresql "42.2.5"]
+                 [buddy/buddy-hashers "1.3.0"]]
   :plugins [[duct/lein-duct "0.11.2"]]
   :main ^:skip-aot todo.main
   :resource-paths ["resources" "target/resources"]
