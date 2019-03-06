@@ -18,7 +18,9 @@
   :todo.handler.articles/index  {:db #ig/ref :duct.database/sql}
   :todo.handler.articles/create {:db #ig/ref :duct.database/sql}
   :todo.handler.users/create    {:db #ig/ref :duct.database/sql}
-  :todo.handler.users/signin    {:db #ig/ref :duct.database/sql}
+
+  :todo.handler.users/signin {:db         #ig/ref :duct.database/sql
+                              :jwt-secret #duct/env "JWT_SECRET"}
 
   :duct.migrator/ragtime
   {:migrations [#ig/ref :todo.migration/create-articles
