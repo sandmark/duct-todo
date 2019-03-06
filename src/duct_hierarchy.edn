@@ -1,1 +1,1 @@
-{}
+{:duct.profile/env_test [:duct/profile]}
