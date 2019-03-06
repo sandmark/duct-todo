@@ -2,15 +2,23 @@
  {:duct.core/project-ns todo
 
   :duct.router/ataraxy
-  {:routes {["/articles"]
+  {:routes {["/users"]
+            {[:post]           [:users/create]
+             [:post "/signin"] [:users/signin]}
+
+            ["/articles"]
             {[:get]  [:articles/index]
              [:post] [:articles/create]}}
 
    :handlers {:articles/index  #ig/ref :todo.handler.articles/index
-              :articles/create #ig/ref :todo.handler.articles/create}}
+              :articles/create #ig/ref :todo.handler.articles/create
+              :users/create    #ig/ref :todo.handler.users/create
+              :users/signin    #ig/ref :todo.handler.users/signin}}
 
   :todo.handler.articles/index  {:db #ig/ref :duct.database/sql}
   :todo.handler.articles/create {:db #ig/ref :duct.database/sql}
+  :todo.handler.users/create    {:db #ig/ref :duct.database/sql}
+  :todo.handler.users/signin    {:db #ig/ref :duct.database/sql}
 
   :duct.migrator/ragtime
   {:migrations [#ig/ref :todo.migration/create-articles
