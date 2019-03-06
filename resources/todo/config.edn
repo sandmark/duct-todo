@@ -3,12 +3,14 @@
 
   :duct.router/ataraxy
   {:routes {["/articles"]
-            {[:get] [:articles/index]}}
+            {[:get]  [:articles/index]
+             [:post] [:articles/create]}}
 
-   :handlers {:articles/index #ig/ref :todo.handler.articles/index}}
+   :handlers {:articles/index  #ig/ref :todo.handler.articles/index
+              :articles/create #ig/ref :todo.handler.articles/create}}
 
-  :todo.handler.articles/index
-  {:db #ig/ref :duct.database/sql}
+  :todo.handler.articles/index  {:db #ig/ref :duct.database/sql}
+  :todo.handler.articles/create {:db #ig/ref :duct.database/sql}
 
   :duct.migrator/ragtime
   {:migrations [#ig/ref :todo.migration/create-articles]}

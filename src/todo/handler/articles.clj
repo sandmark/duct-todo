@@ -8,3 +8,11 @@
     (let [articles (jdbc/query (:spec db)
                                ["SELECT * FROM articles"])]
       [::response/ok articles])))
+
+
+(defmethod ig/init-key ::create [_ {:keys [db]}]
+  (fn [{:keys [body-params]}]
+    (let [result (jdbc/insert! (:spec db)
+                               :articles {:content (:content body-params)})
+          id     (-> result first :id)]
+      [::response/created (str "/articles/" id)])))
