@@ -13,12 +13,19 @@
   :todo.handler.articles/create {:db #ig/ref :duct.database/sql}
 
   :duct.migrator/ragtime
-  {:migrations [#ig/ref :todo.migration/create-articles]}
+  {:migrations [#ig/ref :todo.migration/create-articles
+                #ig/ref :todo.migration/create-users]}
 
   [:duct.migrator.ragtime/sql :todo.migration/create-articles]
   {:up   ["CREATE TABLE articles (id serial NOT NULL PRIMARY KEY,
                                   content text NOT NULL)"]
-   :down ["DROP TABLE articles"]}}
+   :down ["DROP TABLE articles"]}
+
+  [:duct.migrator.ragtime/sql :todo.migration/create-users]
+  {:up   ["CREATE TABLE users (id serial NOT NULL PRIMARY KEY,
+                        email varchar(80) NOT NULL UNIQUE,
+                        password_digest varchar(255) NOT NULL)"]
+   :down ["DROP TABLE users"]}}
 
  :duct.profile/env_test #duct/include "env_test"
  :duct.profile/dev      #duct/include "dev"
