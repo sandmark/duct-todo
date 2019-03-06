@@ -30,5 +30,6 @@
                   :dependencies   [[integrant/repl "0.3.1"]
                                    [eftest "0.5.7"]
                                    [kerodon "0.9.0"]
-                                   [alembic "0.3.2"]]
+                                   [alembic "0.3.2"]
+                                   [com.gearswithingears/shrubbery "0.4.1"]]
                   :plugins        [[lein-ancient "0.6.15"]]}})
