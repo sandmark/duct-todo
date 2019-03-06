@@ -1,6 +1,10 @@
 {:duct.profile/base
  {:duct.core/project-ns todo
 
+  :duct.middleware.buddy/authentication
+  {:backend :jws
+   :secret  #duct/env "JWT_SECRET"}
+
   :duct.router/ataraxy
   {:routes {["/users"]
             {[:post]           [:users/create]
@@ -8,12 +12,14 @@
 
             ["/articles"]
             {[:get]  [:articles/index]
-             [:post] [:articles/create]}}
+             [:post] ^:jws-auth [:articles/create]}}
 
    :handlers {:articles/index  #ig/ref :todo.handler.articles/index
               :articles/create #ig/ref :todo.handler.articles/create
               :users/create    #ig/ref :todo.handler.users/create
-              :users/signin    #ig/ref :todo.handler.users/signin}}
+              :users/signin    #ig/ref :todo.handler.users/signin}
+
+   :middleware {:jws-auth #ig/ref :duct.middleware.buddy/authentication}}
 
   :todo.handler.articles/index  {:db #ig/ref :duct.database/sql}
   :todo.handler.articles/create {:db #ig/ref :duct.database/sql}
