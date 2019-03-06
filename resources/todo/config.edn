@@ -2,11 +2,13 @@
  {:duct.core/project-ns todo
 
   :duct.router/ataraxy
-  {:routes {[:get "/"]         [:index]
-            [:get "/articles"] [:articles/index]
+  {:routes {[:get "/"] [:index]
 
-            [:post "/articles" {{:keys [content]} :body-params}]
-            [:articles/create content]}
+            ["/articles"]
+            {[:get] [:articles/index]
+
+             [:post {{:keys [content]} :body-params}]
+             [:articles/create content]}}
 
    :handlers {:index           #ig/ref :todo.handler/index
               :articles/index  #ig/ref :todo.handler.articles/index
