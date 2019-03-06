@@ -10,4 +10,9 @@
 (t/deftest boundary-articles-test
   (t/testing "create article"
     (let [id (sut/create-article u/db {:content "foo"})]
-      (t/is (int? id)))))
+      (t/is (int? id))))
+
+  (t/testing "index articles"
+    (let [results (sut/index-articles u/db)]
+      (t/is (= 1 (count results)))
+      (t/is (= "foo" (-> results first :content))))))
