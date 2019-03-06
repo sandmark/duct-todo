@@ -11,7 +11,8 @@
                  [duct/handler.sql "0.4.0"]
                  [duct/middleware.buddy "0.1.0"]
                  [org.postgresql/postgresql "42.2.5"]
-                 [buddy/buddy-hashers "1.3.0"]]
+                 [buddy/buddy-hashers "1.3.0"]
+                 [funcool/struct "1.3.0"]]
   :plugins [[duct/lein-duct "0.11.2"]]
   :main ^:skip-aot todo.main
   :resource-paths ["resources" "target/resources"]
