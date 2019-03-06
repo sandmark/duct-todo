@@ -1,2 +1,2 @@
 {:duct.database/sql
- {:connection-uri "jdbc:postgresql://db:5432/todo-development?user=postgres&password="}}
+ {:connection-uri #duct/env "DEV_DB_URL"}}
