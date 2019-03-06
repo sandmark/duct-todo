@@ -1,6 +1,6 @@
-(defproject todo "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject todo "0.1.0"
+  :description "An example todo application built with Duct"
+  :url "https://github.com/sandmark/duct-todo/"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [duct/core "0.7.0"]
