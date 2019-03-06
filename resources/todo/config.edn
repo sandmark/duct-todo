@@ -32,9 +32,10 @@
                                   content text NOT NULL)"]
    :down ["DROP TABLE articles"]}}
 
- :duct.profile/dev   #duct/include "dev"
- :duct.profile/local #duct/include "local"
- :duct.profile/prod  {}
+ :duct.profile/env_test #duct/include "env_test"
+ :duct.profile/dev      #duct/include "dev"
+ :duct.profile/local    #duct/include "local"
+ :duct.profile/prod     {}
 
  :duct.module/logging {}
  :duct.module.web/api {}
