@@ -2,27 +2,13 @@
  {:duct.core/project-ns todo
 
   :duct.router/ataraxy
-  {:routes {[:get "/"] [:index]
+  {:routes {["/articles"]
+            {[:get] [:articles/index]}}
 
-            ["/articles"]
-            {[:get] [:articles/index]
+   :handlers {:articles/index #ig/ref :todo.handler.articles/index}}
 
-             [:post {{:keys [content]} :body-params}]
-             [:articles/create content]}}
-
-   :handlers {:index           #ig/ref :todo.handler/index
-              :articles/index  #ig/ref :todo.handler.articles/index
-              :articles/create #ig/ref :todo.handler.articles/create}}
-
-  [:duct.handler.static/ok :todo.handler/index]
-  {:body {:articles "/articles"}}
-
-  [:duct.handler.sql/query :todo.handler.articles/index]
-  {:sql ["SELECT * FROM articles"]}
-
-  [:duct.handler.sql/insert :todo.handler.articles/create]
-  {:request {[_ content] :ataraxy/result}
-   :sql     ["INSERT INTO articles (content) VALUES (?)" content]}
+  :todo.handler.articles/index
+  {:db #ig/ref :duct.database/sql}
 
   :duct.migrator/ragtime
   {:migrations [#ig/ref :todo.migration/create-articles]}
